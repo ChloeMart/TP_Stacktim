@@ -28,4 +28,15 @@ INSERT INTO Players (Pseudo, Email, Rank, TotalScore) VALUES
 ('Diana', 'diana@stacktim.com', 'Bronze', 50);
 GO
 
+CREATE TABLE Teams (
+    Id INT PRIMARY KEY IDENTITY(1,1),
+    Name NVARCHAR(100) NOT NULL UNIQUE,
+    Tag CHAR(3) NOT NULL UNIQUE,
+    CaptainId INT NOT NULL,
+    CreationDate DATETIME NOT NULL DEFAULT GETDATE(),
 
+    CONSTRAINT FK_Team_CaptainId FOREIGN KEY (CaptainId) REFERENCES Players (Id),
+
+    CONSTRAINT CHK_Team_Tag_Format CHECK (Tag LIKE '[A-Z][A-Z][A-Z]')
+);
+GO
