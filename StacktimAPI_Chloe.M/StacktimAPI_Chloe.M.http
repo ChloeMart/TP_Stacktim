@@ -1,0 +1,6 @@
+@StacktimAPI_Chloe.M_HostAddress = http://localhost:5244
+
+GET {{StacktimAPI_Chloe.M_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
