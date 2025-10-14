@@ -40,3 +40,9 @@ CREATE TABLE Teams (
     CONSTRAINT CHK_Team_Tag_Format CHECK (Tag LIKE '[A-Z][A-Z][A-Z]')
 );
 GO
+
+INSERT INTO Teams (Name, Tag, CaptainId) VALUES
+('Stacktim Dailybiz', 'STD', 1),
+('Stacktim Idcom', 'STI', 3),
+('Stacktim Software', 'STS', 5);
+GO
