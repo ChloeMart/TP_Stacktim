@@ -62,3 +62,15 @@ CREATE TABLE TeamPlayers (
     CONSTRAINT CHK_TeamPlayers_Role_Valid CHECK (Role IN (0, 1, 2))
 );
 GO
+
+INSERT INTO TeamPlayers (TeamId, PlayerId, Role) VALUES
+(1, 1, 0),
+(1, 2, 1),
+(1, 6, 2),
+(2, 3, 0),
+(2, 4, 1),
+(2, 1, 2),
+(3, 5, 0),
+(3, 6, 1),
+(3, 3, 2);
+GO
