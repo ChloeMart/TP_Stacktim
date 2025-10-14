@@ -16,3 +16,7 @@ GROUP BY Teams.Name;
 SELECT Players.Pseudo, Players.Email, Players.Rank, Players.TotalScore FROM Players
 JOIN TeamPlayers ON Players.Id = TeamPlayers.PlayerId
 WHERE TeamPlayers.PlayerId IS NULL;
+
+-- rank's players
+SELECT COUNT(Players.Id) AS "Rank's players" FROM Players
+GROUP BY Players.Rank;
