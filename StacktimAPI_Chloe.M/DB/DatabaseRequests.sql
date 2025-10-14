@@ -11,3 +11,8 @@ SELECT Teams.Name, COUNT(TeamPlayers.PlayerId) AS "Players count", AVG(Players.T
 JOIN TeamPlayers ON Teams.Id = TeamPlayers.TeamId
 JOIN Players ON Players.Id = TeamPlayers.PlayerId
 GROUP BY Teams.Name;
+
+-- unused players
+SELECT Players.Pseudo, Players.Email, Players.Rank, Players.TotalScore FROM Players
+JOIN TeamPlayers ON Players.Id = TeamPlayers.PlayerId
+WHERE TeamPlayers.PlayerId IS NULL;
