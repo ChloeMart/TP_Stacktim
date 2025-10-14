@@ -19,3 +19,13 @@ CREATE TABLE Players (
 );
 GO
 
+INSERT INTO Players (Pseudo, Email, Rank, TotalScore) VALUES
+('Livio', 'livio@stacktim.com', 'Master', 2500),
+('Dan', 'dan@stacktim.com', 'Gold', 850),
+('Florent', 'florent@stacktim.com', 'Silver', 400),
+('Enys', 'enys@stacktim.com', 'Platinum', 1500),
+('Victor', 'victor@stacktim.com', 'Diamond', 1800),
+('Diana', 'diana@stacktim.com', 'Bronze', 50);
+GO
+
+
