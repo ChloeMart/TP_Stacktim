@@ -46,3 +46,19 @@ INSERT INTO Teams (Name, Tag, CaptainId) VALUES
 ('Stacktim Idcom', 'STI', 3),
 ('Stacktim Software', 'STS', 5);
 GO
+
+CREATE TABLE TeamPlayers (
+    TeamId INT NOT NULL,
+    PlayerId INT NOT NULL,
+    Role INT NOT NULL,
+    JoinDate DATETIME NOT NULL DEFAULT GETDATE(),
+
+    CONSTRAINT PK_TeamPlayers PRIMARY KEY (TeamId, PlayerId),
+
+    CONSTRAINT FK_TeamPlayers_TeamId FOREIGN KEY (TeamId) REFERENCES Teams (Id) ON DELETE CASCADE,
+
+    CONSTRAINT FK_TeamPlayers_PlayerId FOREIGN KEY (PlayerId) REFERENCES Players (Id) ON DELETE CASCADE,
+
+    CONSTRAINT CHK_TeamPlayers_Role_Valid CHECK (Role IN (0, 1, 2))
+);
+GO
