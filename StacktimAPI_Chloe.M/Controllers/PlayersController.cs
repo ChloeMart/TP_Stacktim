@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using StacktimAPI_Chloe.Data;
 using StacktimAPI_Chloe.DTOs;
+using StacktimAPI_Chloe.Models;
 
 namespace StacktimAPI_Chloe.Controllers
 {
@@ -55,6 +56,37 @@ namespace StacktimAPI_Chloe.Controllers
             };
 
             return Ok(playerDto);
+        }
+
+        [HttpPost]
+        public IActionResult CreatePlayer([FromBody] CreatePlayerDto dto)
+        {
+            if (_context.Players.Any(p => p.Pseudo == dto.Pseudo))
+            {
+                return BadRequest(new { message = "Pseudo already used" });
+            }
+
+            var player = new Player
+            {
+                Pseudo = dto.Pseudo,
+                Email = dto.Email,
+                Rank = dto.Rank,
+                TotalScore = 0
+            };
+
+            _context.Players.Add(player);
+            _context.SaveChanges();
+
+            var playerDto = new PlayerDto
+            {
+                Id = player.Id,
+                Pseudo = player.Pseudo,
+                Email = player.Email,
+                Rank = player.Rank,
+                TotalScore = player.TotalScore
+            };
+
+            return CreatedAtAction(nameof(GetPlayer), new {id = player.Id}, playerDto);
         }
     }
 }
