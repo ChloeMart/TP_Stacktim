@@ -125,5 +125,22 @@ namespace StacktimAPI_Chloe.Controllers
                 return NotFound();
             }
         }
+
+        [HttpDelete("{id}")]
+        public IActionResult DeletePlayer(int id)
+        {
+            var player = _context.Players.Find(id);
+
+            if (player != null)
+            {
+                _context.Players.Remove(player);
+                _context.SaveChanges();
+                return NoContent();
+            }
+            else
+            {
+                return NotFound();
+            }
+        }
     }
 }
