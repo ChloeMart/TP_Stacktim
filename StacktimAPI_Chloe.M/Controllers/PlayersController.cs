@@ -24,9 +24,38 @@ namespace StacktimAPI_Chloe.Controllers
         {
             var players = _context.Players.ToList();
 
-            var playersDto = new List<PlayerDto>();
+            if (players != null)
+            {
+                var playersDto = new List<PlayerDto>();
 
-            foreach (var player in players)
+                foreach (var player in players)
+                {
+                    PlayerDto playerDto = new PlayerDto
+                    {
+                        Id = player.Id,
+                        Pseudo = player.Pseudo,
+                        Email = player.Email,
+                        Rank = player.Rank,
+                        TotalScore = player.TotalScore
+                    };
+
+                    playersDto.Add(playerDto);
+                }
+
+                return Ok(playersDto);
+            }
+            else
+            {
+                return NotFound();
+            }
+        }
+
+        [HttpGet("{id}")]
+        public IActionResult GetPlayer(int id)
+        {
+            var player = _context.Players.Find(id);
+
+            if (player != null)
             {
                 PlayerDto playerDto = new PlayerDto
                 {
@@ -37,26 +66,12 @@ namespace StacktimAPI_Chloe.Controllers
                     TotalScore = player.TotalScore
                 };
 
-                playersDto.Add(playerDto);
+                return Ok(playerDto);
             }
-
-            return Ok(playersDto);
-        }
-
-        [HttpGet("{id}")]
-        public IActionResult GetPlayer(int id)
-        {
-            var player = _context.Players.Find(id);
-            PlayerDto playerDto = new PlayerDto
+            else
             {
-                Id = player.Id,
-                Pseudo = player.Pseudo,
-                Email = player.Email,
-                Rank = player.Rank,
-                TotalScore = player.TotalScore
-            };
-
-            return Ok(playerDto);
+                return NotFound();
+            }
         }
 
         [HttpPost]
