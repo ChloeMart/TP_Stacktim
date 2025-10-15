@@ -40,5 +40,21 @@ namespace StacktimAPI_Chloe.Controllers
 
             return Ok(playersDto);
         }
+
+        [HttpGet("{id}")]
+        public IActionResult GetPlayer(int id)
+        {
+            var player = _context.Players.Find(id);
+            PlayerDto playerDto = new PlayerDto
+            {
+                Id = player.Id,
+                Pseudo = player.Pseudo,
+                Email = player.Email,
+                Rank = player.Rank,
+                TotalScore = player.TotalScore
+            };
+
+            return Ok(playerDto);
+        }
     }
 }
