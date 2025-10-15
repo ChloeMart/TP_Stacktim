@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -87,6 +88,42 @@ namespace StacktimAPI_Chloe.Controllers
             };
 
             return CreatedAtAction(nameof(GetPlayer), new {id = player.Id}, playerDto);
+        }
+
+        [HttpPut("{id}")]
+        public IActionResult UpdatePlayer(int id, [FromBody] UpdatePlayerDto dto)
+        {
+            var player = _context.Players.Find(id);
+
+            if (player != null)
+            {
+                if (dto.Pseudo != null)
+                {
+                    if (_context.Players.Any(p => p.Pseudo == dto.Pseudo))
+                    {
+                        return BadRequest(new { message = "Pseudo already used" });
+                    }
+                    player.Pseudo = dto.Pseudo;
+                }
+                if (dto.Email != null)
+                {
+                    player.Email = dto.Email;
+                }
+                if (dto.Rank != null)
+                {
+                    player.Rank = dto.Rank;
+                }
+                if (dto.TotalScore != null)
+                {
+                    player.TotalScore = (int)dto.TotalScore;
+                }
+                _context.SaveChanges();
+                return NoContent();
+            } 
+            else
+            {
+                return NotFound();
+            }
         }
     }
 }
