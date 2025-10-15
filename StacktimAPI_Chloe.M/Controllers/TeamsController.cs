@@ -46,5 +46,28 @@ namespace StacktimAPI_Chloe.Controllers
             }
         }
 
+        [HttpGet("{id}")]
+        public IActionResult GetTeam(int id)
+        {
+            var team = _context.Teams.Find(id);
+
+            if (team != null)
+            {
+                TeamDto teamDto = new TeamDto
+                {
+                    Id = team.Id,
+                    Name = team.Name,
+                    Tag = team.Tag,
+                    CaptainId = team.CaptainId
+                };
+
+                return Ok(teamDto);
+            }
+            else
+            {
+                return NotFound();
+            }
+        }
+
     }
 }
