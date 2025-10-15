@@ -14,7 +14,7 @@ namespace StacktimAPI_Chloe.Controllers
     public class PlayersController : ControllerBase
     {
         private readonly StacktimDbContext _context;
-        public PlayersController(StacktimDbContext dbContext) 
+        public PlayersController(StacktimDbContext dbContext)
         {
             _context = dbContext;
         }
@@ -102,7 +102,7 @@ namespace StacktimAPI_Chloe.Controllers
                 TotalScore = player.TotalScore
             };
 
-            return CreatedAtAction(nameof(GetPlayer), new {id = player.Id}, playerDto);
+            return CreatedAtAction(nameof(GetPlayer), new { id = player.Id }, playerDto);
         }
 
         [HttpPut("{id}")]
@@ -134,7 +134,7 @@ namespace StacktimAPI_Chloe.Controllers
                 }
                 _context.SaveChanges();
                 return NoContent();
-            } 
+            }
             else
             {
                 return NotFound();
@@ -156,6 +156,35 @@ namespace StacktimAPI_Chloe.Controllers
             {
                 return NotFound();
             }
+        }
+
+        [HttpGet("leaderboard")]
+        public IActionResult GetLeaderboard()
+        {
+            var players = _context.Players.OrderByDescending(p => p.TotalScore).ToList();
+
+            var playersDto = new List<PlayerDto>();
+
+            if (players.Count == 0)
+            {
+                return NotFound();
+            }
+
+            foreach (var player in players)
+            {
+                PlayerDto playerDto = new PlayerDto
+                {
+                    Id = player.Id,
+                    Pseudo = player.Pseudo,
+                    Email = player.Email,
+                    Rank = player.Rank,
+                    TotalScore = player.TotalScore
+                };
+
+                playersDto.Add(playerDto);
+            }
+
+            return Ok(playersDto);
         }
     }
 }
