@@ -361,3 +361,4 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/StacktimAPI_Chloe.M/Controllers/TeamsController.cs
