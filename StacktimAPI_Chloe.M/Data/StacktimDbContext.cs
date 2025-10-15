@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
-using StacktimAPI_Chloe.M.Models;
+using StacktimAPI_Chloe.Models;
 
-namespace StacktimAPI_Chloe.M.Data;
+namespace StacktimAPI_Chloe.Data;
 
 public partial class StacktimDbContext : DbContext
 {

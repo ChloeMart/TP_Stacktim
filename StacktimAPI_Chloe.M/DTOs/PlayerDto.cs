@@ -1,4 +1,4 @@
-﻿namespace StacktimAPI_Chloe.M.DTOs
+﻿namespace StacktimAPI_Chloe.DTOs
 {
     public class PlayerDto
     {

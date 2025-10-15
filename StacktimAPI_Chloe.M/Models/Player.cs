@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace StacktimAPI_Chloe.M.Models;
+namespace StacktimAPI_Chloe.Models;
 
 public partial class Player
 {
