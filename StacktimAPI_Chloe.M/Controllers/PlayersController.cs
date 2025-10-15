@@ -77,9 +77,9 @@ namespace StacktimAPI_Chloe.Controllers
         [HttpPost]
         public IActionResult CreatePlayer([FromBody] CreatePlayerDto dto)
         {
-            if (_context.Players.Any(p => p.Pseudo == dto.Pseudo))
+            if (_context.Players.Any(p => p.Pseudo == dto.Pseudo || p.Email == dto.Email))
             {
-                return BadRequest(new { message = "Pseudo already used" });
+                return BadRequest(new { message = "Pseudo or email already used" });
             }
 
             var player = new Player
@@ -114,9 +114,9 @@ namespace StacktimAPI_Chloe.Controllers
             {
                 if (dto.Pseudo != null)
                 {
-                    if (_context.Players.Any(p => p.Pseudo == dto.Pseudo))
+                    if (_context.Players.Any(p => p.Pseudo == dto.Pseudo || p.Email == dto.Email))
                     {
-                        return BadRequest(new { message = "Pseudo already used" });
+                        return BadRequest(new { message = "Pseudo or email already used" });
                     }
                     player.Pseudo = dto.Pseudo;
                 }
