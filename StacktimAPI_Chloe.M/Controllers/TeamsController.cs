@@ -98,5 +98,26 @@ namespace StacktimAPI_Chloe.Controllers
             return CreatedAtAction(nameof(GetTeam), new { id = team.Id }, teamDto);
         }
 
+        [HttpGet("{id}/Roster")]
+        public IActionResult GetTeamPlayers(int id)
+        {
+            var teamPlayers = _context.TeamPlayers
+                .Where(tp => tp.TeamId == id)
+                .Select(tp => new PlayerDto
+                {
+                    Id = tp.PlayerId,
+                    Pseudo = tp.Player.Pseudo,
+                    Email = tp.Player.Email,
+                    Rank = tp.Player.Rank,
+                    TotalScore = tp.Player.TotalScore,
+                }).ToList();
+            if (teamPlayers ==  null || teamPlayers.Count == 0)
+            {
+                return NotFound();
+            }
+
+            return Ok(teamPlayers);
+        }
+
     }
 }
