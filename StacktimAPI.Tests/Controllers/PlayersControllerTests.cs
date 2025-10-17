@@ -94,5 +94,14 @@ namespace StacktimAPI.Tests.Controllers
             _context.Players.Should().NotContain(p => p.Id == 1);
         }
 
+        [Fact]
+        public void GetLeaderboard_ReturnsOrderedPlayers()
+        {
+            var result = _controller.GetLeaderboard() as OkObjectResult;
+
+            result.Should().NotBeNull();
+            var players = result.Value as IEnumerable<PlayerDto>;
+            players.Should().BeInDescendingOrder(p => p.TotalScore);
+        }
     }
 }
