@@ -122,5 +122,14 @@ namespace StacktimAPI.Tests.Controllers
             player.Rank.Should().Be("Diamond");
             player.TotalScore.Should().Be(3000);
         }
+
+        [Fact]
+        public void DeletePlayer_InvalidId_ReturnsNotFound()
+        {
+            var result = _controller.DeletePlayer(4);
+
+            result.Should().BeOfType<NotFoundResult>();
+        }
+
     }
 }
