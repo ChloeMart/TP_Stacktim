@@ -33,5 +33,16 @@ namespace StacktimAPI.Tests.Controllers
             var players = result.Value as IEnumerable<PlayerDto>;
             players.Should().HaveCount(3);
         }
+
+        [Fact]
+        public void GetPlayer_WithValidId_ReturnsPlayer()
+        {
+            var result = _controller.GetPlayer(1) as OkObjectResult;
+
+            result.Should().NotBeNull();
+            var player = result.Value as PlayerDto;
+            player.Pseudo.Should().Be("test_player1");
+        }
+
     }
 }
