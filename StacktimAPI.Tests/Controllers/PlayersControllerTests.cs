@@ -44,5 +44,13 @@ namespace StacktimAPI.Tests.Controllers
             player.Pseudo.Should().Be("test_player1");
         }
 
+        [Fact]
+        public void GetPlayer_WithInvalidId_ReturnsNotFound()
+        {
+            var result = _controller.GetPlayer(4);
+
+            result.Should().BeOfType<NotFoundResult>();
+        }
+
     }
 }
