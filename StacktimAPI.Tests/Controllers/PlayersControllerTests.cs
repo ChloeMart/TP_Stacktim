@@ -70,5 +70,20 @@ namespace StacktimAPI.Tests.Controllers
             _context.Players.Should().Contain(p => p.Pseudo == "Gena");
         }
 
+        [Fact]
+        public void CreatePlayer_WithDuplicatePseudo_ReturnsBadRequest()
+        {
+            var dto = new CreatePlayerDto
+            {
+                Pseudo = "testplayer1",
+                Email = "test1@example.com",
+                Rank = "Gold"
+            };
+
+            var result = _controller.CreatePlayer(dto) as BadRequestObjectResult;
+
+            result.Should().NotBeNull();
+        }
+
     }
 }
