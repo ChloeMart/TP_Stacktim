@@ -85,5 +85,14 @@ namespace StacktimAPI.Tests.Controllers
             result.Should().NotBeNull();
         }
 
+        [Fact]
+        public void DeletePlayer_WithValidId_ReturnsNoContent()
+        {
+            var result = _controller.DeletePlayer(1);
+
+            result.Should().BeOfType<NoContentResult>();
+            _context.Players.Should().NotContain(p => p.Id == 1);
+        }
+
     }
 }
