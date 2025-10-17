@@ -52,5 +52,23 @@ namespace StacktimAPI.Tests.Controllers
             result.Should().BeOfType<NotFoundResult>();
         }
 
+        [Fact]
+        public void CreatePlayer_WithValidData_ReturnsCreated()
+        {
+            var dto = new CreatePlayerDto
+            {
+                Pseudo = "Gena",
+                Email = "gena@example.com",
+                Rank = "Diamond"
+            };
+
+            var result = _controller.CreatePlayer(dto) as CreatedAtActionResult;
+
+            result.Should().NotBeNull();
+            var created = result.Value as PlayerDto;
+            created.Pseudo.Should().Be("Gena");
+            _context.Players.Should().Contain(p => p.Pseudo == "Gena");
+        }
+
     }
 }
