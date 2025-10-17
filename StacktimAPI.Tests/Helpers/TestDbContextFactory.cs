@@ -1,11 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using StacktimAPI_Chloe.Data;
 using StacktimAPI_Chloe.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace StacktimAPI.Tests.Helpers
 {
@@ -14,7 +9,7 @@ namespace StacktimAPI.Tests.Helpers
         public static StacktimDbContext Create()
         {
             var options = new DbContextOptionsBuilder<StacktimDbContext>()
-                .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString())
+                .UseInMemoryDatabase(Guid.NewGuid().ToString())
                 .Options;
 
             var context = new StacktimDbContext(options);
@@ -23,13 +18,12 @@ namespace StacktimAPI.Tests.Helpers
             context.Database.EnsureCreated();
 
             context.Players.AddRange(
-                new Player { Id = 1, Pseudo = "TestPlayer1", Email = "tp1@test.com", Rank = "Gold", TotalScore = 1000 },
-                new Player { Id = 2, Pseudo = "TestPlayer2", Email = "tp2@test.com", Rank = "Diamond", TotalScore = 2500 },
-                new Player { Id = 3, Pseudo = "TestPlayer3", Email = "tp3@test.com", Rank = "Bronze", TotalScore = 450 }
+                new Player { Id = 1, Pseudo = "test_player1", Email = "test1@example.com", Rank = "Gold", TotalScore = 1500 },
+                new Player { Id = 2, Pseudo = "test_player2", Email = "test2@example.com", Rank = "Platinum", TotalScore = 2300 },
+                new Player { Id = 3, Pseudo = "test_player3", Email = "test3@example.com", Rank = "Silver", TotalScore = 900 }
             );
 
             context.SaveChanges();
-
             return context;
         }
     }
