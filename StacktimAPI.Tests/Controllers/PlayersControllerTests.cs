@@ -103,5 +103,24 @@ namespace StacktimAPI.Tests.Controllers
             var players = result.Value as IEnumerable<PlayerDto>;
             players.Should().BeInDescendingOrder(p => p.TotalScore);
         }
+
+        [Fact]
+        public void UpdatePlayer_ExistingPlayer_UpdatesSuccessfully()
+        {
+            var updateDto = new UpdatePlayerDto
+            {
+                Pseudo = "UpdatedPlayer",
+                Rank = "Diamond",
+                TotalScore = 3000
+            };
+
+            var result = _controller.UpdatePlayer(1, updateDto);
+
+            result.Should().BeOfType<NoContentResult>();
+            var player = _context.Players.Find(1);
+            player.Pseudo.Should().Be("UpdatedPlayer");
+            player.Rank.Should().Be("Diamond");
+            player.TotalScore.Should().Be(3000);
+        }
     }
 }
