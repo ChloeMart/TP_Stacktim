@@ -131,5 +131,21 @@ namespace StacktimAPI.Tests.Controllers
             result.Should().BeOfType<NotFoundResult>();
         }
 
+        [Fact]
+        public void CreatePlayer_InvalidEmail_ReturnsBadRequest()
+        {
+            var dto = new CreatePlayerDto
+            {
+                Pseudo = "InvalidEmailUser",
+                Email = "test1@example.com",
+                Rank = "Gold"
+            };
+
+            _controller.ModelState.AddModelError("Email", "Invalid email format");
+
+            var result = _controller.CreatePlayer(dto);
+
+            result.Should().BeOfType<BadRequestObjectResult>();
+        }
     }
 }
