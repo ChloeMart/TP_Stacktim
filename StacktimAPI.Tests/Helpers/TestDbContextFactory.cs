@@ -23,6 +23,12 @@ namespace StacktimAPI.Tests.Helpers
                 new Player { Id = 3, Pseudo = "test_player3", Email = "test3@example.com", Rank = "Silver", TotalScore = 900 }
             );
 
+            context.Teams.AddRange(
+                new Team { Id = 1, Name = "test_team1", Tag = "TTA", CaptainId = 1 },
+                new Team { Id = 2, Name = "test_team2", Tag = "TTB", CaptainId = 2 },
+                new Team { Id = 3, Name = "test_team3", Tag = "TTC", CaptainId = 3 }
+                );
+
             context.SaveChanges();
             return context;
         }

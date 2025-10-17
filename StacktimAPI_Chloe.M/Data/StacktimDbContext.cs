@@ -68,6 +68,7 @@ public partial class StacktimDbContext : DbContext
             entity.HasOne(d => d.Captain).WithMany(p => p.Teams)
                 .HasForeignKey(d => d.CaptainId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
+                .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("FK_Team_CaptainId");
         });
 

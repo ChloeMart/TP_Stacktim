@@ -1,15 +1,9 @@
 ﻿using FluentAssertions;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using StacktimAPI.Tests.Helpers;
 using StacktimAPI_Chloe.Controllers;
 using StacktimAPI_Chloe.Data;
 using StacktimAPI_Chloe.DTOs;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace StacktimAPI.Tests.Controllers
 {
